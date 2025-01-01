@@ -33,7 +33,26 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 ## Usage
 
-`TODO`: Write a library description. Put some examples here.
+Here is how to render a sequence diagram to `PNG` file:
+
+```
+CL-USER> (setf 40ants-plantuml:*path-to-jar*
+               "~/plantuml-mit-1.2024.8.jar")
+
+CL-USER> (40ants-plantuml:render "
+  @startuml
+  CommoLisp -> PlantUML : render
+  activate PlantUML
+  return PNG file
+  @enduml
+  "
+
+#P"/tmp/diagram.png")
+; No values
+```
+It will render an image like this:
+
+![](docs/images/diagram.png)
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -45,7 +64,7 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 <a id="x-28-23A-28-2815-29-20BASE-CHAR-20-2E-20-2240ANTS-PLANTUML-22-29-20PACKAGE-29"></a>
 
-#### [package](1a67) `40ants-plantuml`
+#### [package](059c) `40ants-plantuml`
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-7C-4040ANTS-PLANTUML-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -53,7 +72,7 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 <a id="x-2840ANTS-PLANTUML-3ARENDER-20FUNCTION-29"></a>
 
-##### [function](5e79) `40ants-plantuml:render` diagram-code output-filename
+##### [function](82bd) `40ants-plantuml:render` diagram-code output-filename
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-7C-4040ANTS-PLANTUML-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -61,13 +80,13 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 <a id="x-2840ANTS-PLANTUML-3A-2APATH-TO-GRAPHVIZ-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](77b9) `40ants-plantuml:*path-to-graphviz*` nil
+##### [variable](2ef6) `40ants-plantuml:*path-to-graphviz*` nil
 
 If given, should be a path to `dot` binary of Graphviz. Will be passed as -graphvizdot option to the `PlantUML`.
 
 <a id="x-2840ANTS-PLANTUML-3A-2APATH-TO-JAR-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](8aaa) `40ants-plantuml:*path-to-jar*` nil
+##### [variable](cfb2) `40ants-plantuml:*path-to-jar*` nil
 
 Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.
 
@@ -75,10 +94,10 @@ Set this variable to a path to the plantuml.jar. Note, there are different build
 [577d]: https://40ants.com/plantuml
 [aa24]: https://github.com/40ants/plantuml
 [727f]: https://github.com/40ants/plantuml/actions
-[1a67]: https://github.com/40ants/plantuml/blob/bb0530f89bf14bb1ad6619b8a0634d81df7364bd/src/core.lisp#L1
-[8aaa]: https://github.com/40ants/plantuml/blob/bb0530f89bf14bb1ad6619b8a0634d81df7364bd/src/core.lisp#L17
-[77b9]: https://github.com/40ants/plantuml/blob/bb0530f89bf14bb1ad6619b8a0634d81df7364bd/src/core.lisp#L22
-[5e79]: https://github.com/40ants/plantuml/blob/bb0530f89bf14bb1ad6619b8a0634d81df7364bd/src/core.lisp#L46
+[059c]: https://github.com/40ants/plantuml/blob/c4f787c0f5cca7b3636a15cfc03281272654f15a/src/core.lisp#L1
+[cfb2]: https://github.com/40ants/plantuml/blob/c4f787c0f5cca7b3636a15cfc03281272654f15a/src/core.lisp#L17
+[2ef6]: https://github.com/40ants/plantuml/blob/c4f787c0f5cca7b3636a15cfc03281272654f15a/src/core.lisp#L22
+[82bd]: https://github.com/40ants/plantuml/blob/c4f787c0f5cca7b3636a15cfc03281272654f15a/src/core.lisp#L46
 [d36f]: https://github.com/40ants/plantuml/issues
 [8236]: https://quickdocs.org/alexandria
 [c41d]: https://quickdocs.org/serapeum
