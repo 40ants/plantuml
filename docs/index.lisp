@@ -34,14 +34,14 @@
   
   (list :theme
         (find-symbol "40ANTS-THEME"
-                     (find-package "40ANTS-DOC-THEME-40ANTS")))
-  )
+                     (find-package "40ANTS-DOC-THEME-40ANTS"))))
 
 
 (defsection @index (:title "40ants-plantuml - Wrapper around PlantUML jar library"
                     :ignore-words ("JSON"
                                    "HTTP"
                                    "PNG"
+                                   "JAR"
                                    "TODO"
                                    "Unlicense"
                                    "PlantUML"
@@ -83,12 +83,23 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 (defsection @usage (:title "Usage")
   """
-Here is how to render a sequence diagram to PNG file:
+To make a diagram, first you need to download JAR file with
+Java program `PlantUML` from official site https://plantuml.com/.
+
+Then you'll have to set a path to this JAR file like this:
 
 ```
 CL-USER> (setf 40ants-plantuml:*path-to-jar*
                "~/plantuml-mit-1.2024.8.jar")
 
+```
+
+And of cause you will need some Java implementation suitable
+for running this JAR file.
+
+Here is how to render a sequence diagram to PNG file:
+
+```
 CL-USER> (40ants-plantuml:render "
   @startuml
   CommoLisp -> PlantUML : render
