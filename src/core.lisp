@@ -21,7 +21,7 @@
 
 (defvar *path-to-graphviz*
   nil
-  "If given, should be a path to `dot` binary of Graphviz. Will be passed as -graphvizdot option to the Plantuml.")
+  "If given, should be a path to `dot` binary of Graphviz. Will be passed as -graphvizdot option to the `PlantUML`.")
 
 
 (define-condition plantuml-error (error)
@@ -34,7 +34,7 @@
                   :initform (required-argument "ERROR-MESSAGE is required argument.")
                   :reader plantuml-error-message))
   (:report (lambda (condition stream)
-             (format stream "PlantUML exited with code ~A and this error output:~2%~A"
+             (format stream "`PlantUML` exited with code ~A and this error output:~2%~A"
                      (plantuml-exit-code condition)
                      (plantuml-error-message condition)))))
 
