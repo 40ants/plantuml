@@ -41,6 +41,7 @@
 (defsection @index (:title "40ants-plantuml - Wrapper around PlantUML jar library"
                     :ignore-words ("JSON"
                                    "HTTP"
+                                   "PNG"
                                    "TODO"
                                    "Unlicense"
                                    "PlantUML"
@@ -81,9 +82,30 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 
 (defsection @usage (:title "Usage")
+  """
+Here is how to render a sequence diagram to PNG file:
+
+```
+CL-USER> (setf 40ants-plantuml:*path-to-jar*
+               "~/plantuml-mit-1.2024.8.jar")
+
+CL-USER> (40ants-plantuml:render "
+  @startuml
+  CommoLisp -> PlantUML : render
+  activate PlantUML
+  return PNG file
+  @enduml
   "
-TODO: Write a library description. Put some examples here.
-")
+
+#P"/tmp/diagram.png")
+; No values
+```
+
+It will render an image like this:
+
+![](docs/images/diagram.png)
+
+""")
 
 
 (defautodoc @api (:system "40ants-plantuml"))
