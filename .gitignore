@@ -1,0 +1,6 @@
+.qlot/
+/docs/build/
+*~
+.#*
+.*.~undo-tree~
+*.fasl
