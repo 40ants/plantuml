@@ -61,7 +61,7 @@ CL-USER> (40ants-plantuml:render "
 ```
 It will render an image like this:
 
-![](docs/images/diagram.png)
+![](/home/runner/work/plantuml/plantuml/docs/images/diagram.png)
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -73,7 +73,7 @@ It will render an image like this:
 
 <a id="x-28-23A-28-2815-29-20BASE-CHAR-20-2E-20-2240ANTS-PLANTUML-22-29-20PACKAGE-29"></a>
 
-#### [package](8d72) `40ants-plantuml`
+#### [package](5fb9) `40ants-plantuml`
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-7C-4040ANTS-PLANTUML-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -81,7 +81,7 @@ It will render an image like this:
 
 <a id="x-2840ANTS-PLANTUML-3ARENDER-20FUNCTION-29"></a>
 
-##### [function](271c) `40ants-plantuml:render` diagram-code output-filename
+##### [function](29dc) `40ants-plantuml:render` diagram-code output-filename
 
 <a id="x-2840ANTS-PLANTUML-DOCS-2FINDEX-3A-3A-7C-4040ANTS-PLANTUML-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -89,24 +89,28 @@ It will render an image like this:
 
 <a id="x-2840ANTS-PLANTUML-3A-2APATH-TO-GRAPHVIZ-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](1912) `40ants-plantuml:*path-to-graphviz*` nil
+##### [variable](4912) `40ants-plantuml:*path-to-graphviz*` nil
 
 If given, should be a path to `dot` binary of Graphviz. Will be passed as -graphvizdot option to the `PlantUML`.
 
 <a id="x-2840ANTS-PLANTUML-3A-2APATH-TO-JAR-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](7f65) `40ants-plantuml:*path-to-jar*` nil
+##### [variable](2c0c) `40ants-plantuml:*path-to-jar*` nil
 
 Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.
+
+If this variable is `NIL`, then /usr/share/plantuml/plantuml.jar will be used if it is exists. On Ubuntu this file
+is created when use do `apt install plantuml`. Note, the version of the `PlantUML` in the Ubuntu package could be outdated
+and missing some important features.
 
 
 [577d]: https://40ants.com/plantuml
 [aa24]: https://github.com/40ants/plantuml
 [727f]: https://github.com/40ants/plantuml/actions
-[8d72]: https://github.com/40ants/plantuml/blob/10ce41fbf1e9696fbcfc4387fc6bfaa176922469/src/core.lisp#L1
-[7f65]: https://github.com/40ants/plantuml/blob/10ce41fbf1e9696fbcfc4387fc6bfaa176922469/src/core.lisp#L17
-[1912]: https://github.com/40ants/plantuml/blob/10ce41fbf1e9696fbcfc4387fc6bfaa176922469/src/core.lisp#L22
-[271c]: https://github.com/40ants/plantuml/blob/10ce41fbf1e9696fbcfc4387fc6bfaa176922469/src/core.lisp#L46
+[5fb9]: https://github.com/40ants/plantuml/blob/edd9c276a09236d82a39c085ddd134d44dda349b/src/core.lisp#L1
+[2c0c]: https://github.com/40ants/plantuml/blob/edd9c276a09236d82a39c085ddd134d44dda349b/src/core.lisp#L17
+[4912]: https://github.com/40ants/plantuml/blob/edd9c276a09236d82a39c085ddd134d44dda349b/src/core.lisp#L26
+[29dc]: https://github.com/40ants/plantuml/blob/edd9c276a09236d82a39c085ddd134d44dda349b/src/core.lisp#L50
 [d36f]: https://github.com/40ants/plantuml/issues
 [8236]: https://quickdocs.org/alexandria
 [c41d]: https://quickdocs.org/serapeum
