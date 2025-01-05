@@ -16,7 +16,11 @@
 
 (defvar *path-to-jar*
   nil
-  "Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.")
+  "Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.
+
+   If this variable is NIL, then /usr/share/plantuml/plantuml.jar will be used if it is exists. On Ubuntu this file
+   is created when use do `apt install plantuml`. Note, the version of the `PlantUML` in the Ubuntu package could be outdated
+   and missing some important features.")
 
 
 (defvar *path-to-graphviz*
