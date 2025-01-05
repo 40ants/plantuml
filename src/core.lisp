@@ -16,7 +16,11 @@
 
 (defvar *path-to-jar*
   nil
-  "Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.")
+  "Set this variable to a path to the plantuml.jar. Note, there are different builds of plantuml with different licensing.
+
+   If this variable is NIL, then /usr/share/plantuml/plantuml.jar will be used if it is exists. On Ubuntu this file
+   is created when use do `apt install plantuml`. Note, the version of the `PlantUML` in the Ubuntu package could be outdated
+   and missing some important features.")
 
 
 (defvar *path-to-graphviz*
@@ -44,40 +48,58 @@
 
 
 (defun render (diagram-code output-filename)
-  (unless *path-to-jar*
-    (error "Please, set 40ants-plantuml:*path-to-jar* variable."))
-
-  (unless (probe-file *path-to-jar*)
-    (error "Variable 40ants-plantuml:*path-to-jar* points to ~S which can't be found."
-           *path-to-jar*))
-
-  (when (and *path-to-graphviz*
-             (not (probe-file *path-to-graphviz*)))
-    (error "Variable 40ants-plantuml:*path-to-graphviz* points to ~S which can't be found."
-           *path-to-graphviz*))
+  (let ((path-to-jar
+          (cond
+            ((null *path-to-jar*)
+             (let ((system-jar
+                     (probe-file "/usr/share/plantuml/plantuml.jar")))
+               (cond
+                 (system-jar
+                  system-jar)
+                 (t
+                  (error "Please, set 40ants-plantuml:*path-to-jar* variable or do \"apt install plantuml\".")))))
+            ((probe-file *path-to-jar*)
+             (probe-file *path-to-jar*))
+            (t
+             (error "Variable 40ants-plantuml:*path-to-jar* points to ~S which can't be found."
+                    *path-to-jar*))))
+        (path-to-graphviz
+          (when *path-to-graphviz*
+            (cond
+              ((probe-file *path-to-graphviz*)
+               ;; We should not use result of PROBE-FILE
+               ;; here because it can resolve /usr/bin/dot
+               ;; to /usr/sbin/libgvc6-config-update and
+               ;; graphviz will work incorrectly when used like this.
+               *path-to-graphviz*)
+              (t
+               (error "Variable 40ants-plantuml:*path-to-graphviz* points to ~S which can't be found."
+                      *path-to-graphviz*))))))
   
-  (with-input-from-string (input-stream diagram-code)
-    (uiop:with-output-file (output-stream output-filename
-                                          :if-exists :supersede
-                                          :element-type '(unsigned-byte 8))
-      (let ((error-stream (make-string-output-stream)))
-        (handler-bind ((uiop:subprocess-error
-                         (lambda (err)
-                           (error 'plantuml-error
-                                  :exit-code (uiop:subprocess-error-code err)
-                                  :error-message (string-right-trim '(#\Space #\Newline)
-                                                                    (get-output-stream-string error-stream))))))
-          (uiop:run-program (append
-                             (list "java"
-                                   "-jar"
-                                   (namestring
-                                    (probe-file *path-to-jar*))
-                                   "-pipe")
-                             (when *path-to-graphviz*
-                               (list "-graphvizdot"
-                                     *path-to-graphviz*)))
-                            :input input-stream
-                            :output output-stream
-                            :error-output error-stream)))
-      ;; (values)
-      )))
+    (with-input-from-string (input-stream diagram-code)
+      (uiop:with-output-file (output-stream output-filename
+                                            :if-exists :supersede
+                                            :element-type '(unsigned-byte 8))
+        (let ((error-stream (make-string-output-stream)))
+          (handler-bind ((uiop:subprocess-error
+                           (lambda (err)
+                             (error 'plantuml-error
+                                    :exit-code (uiop:subprocess-error-code err)
+                                    :error-message (string-right-trim '(#\Space #\Newline)
+                                                                      (get-output-stream-string error-stream))))))
+            (let ((command-line
+                    (append
+                     (list "java"
+                           "-jar"
+                           (namestring
+                            (probe-file path-to-jar))
+                           "-pipe")
+                     (when path-to-graphviz
+                       (list "-graphvizdot"
+                             (namestring
+                              path-to-graphviz))))))
+              (uiop:run-program command-line
+                                :input input-stream
+                                :output output-stream
+                                :error-output error-stream))))
+        (values)))))
